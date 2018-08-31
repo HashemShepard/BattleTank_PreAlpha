@@ -17,17 +17,15 @@ class BT_PRE_ALPHA_API ATankAiController : public AAIController
 public:
 	
 
-
-
 private:
 	ATank* GetAiTank() const;
 	ATank* GetPlayerTank() const;
 	virtual void BeginPlay() override;
+	virtual void Tick(float DeltaTime) override;
+	void AimTowardPlayer();
 	
 	
 	ATank* AiPlyr = nullptr;
 	ATank* AiEnemy = nullptr;
-	
-	
 };
 

@@ -27,3 +27,19 @@ void ATankAiController::BeginPlay()
 	else { UE_LOG(LogTemp, Warning, TEXT("Ai Found its Enemy : %s"), *(AiEnemy->GetName())); }
 
 }
+
+void ATankAiController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	AimTowardPlayer();
+	
+}
+
+void ATankAiController::AimTowardPlayer()
+{
+	if (GetPlayerTank())
+	{
+		FVector PlyrLoc = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
+		GetAiTank()->Aim(PlyrLoc);
+	}
+}
