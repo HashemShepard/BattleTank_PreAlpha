@@ -17,16 +17,11 @@ void ATankAiController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UE_LOG(LogTemp, Warning, TEXT("AiTank is here"));
 	AiPlyr = GetAiTank();
-
 	if (!AiPlyr) { UE_LOG(LogTemp, Warning, TEXT("Ai Not Working")); return; }
-	else { UE_LOG(LogTemp, Warning, TEXT("Ai is %s"), *(AiPlyr->GetName())); }
 
 	AiEnemy = GetPlayerTank();
 	if (!AiEnemy) { UE_LOG(LogTemp, Warning, TEXT("Ai Cant Find Enemy")); return; }
-	else { UE_LOG(LogTemp, Warning, TEXT("Ai Found its Enemy : %s"), *(AiEnemy->GetName())); }
-
 }
 
 void ATankAiController::Tick(float DeltaTime)

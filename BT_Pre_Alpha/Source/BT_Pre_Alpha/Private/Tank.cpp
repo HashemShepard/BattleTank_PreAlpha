@@ -12,13 +12,13 @@ ATank::ATank()
 }
 
 void ATank::SetBarrelRef(UTankBarrel* BarrelToSet) { TankAimComponent->SetBarrelRef(BarrelToSet); }
+void ATank::SetTurretRef(UTank_Turret * TurretToSet) { TankAimComponent->SetTurretRef(TurretToSet); }
 
 // Called when the game starts or when spawned
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
 }
-
 
 // Called to bind functionality to input
 void ATank::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -30,6 +30,13 @@ void ATank::Aim(FVector AimLoc)
 {
 	TankAimComponent->AimAt(AimLoc, LaunchSpeed);
 }
+
+void ATank::Fire()
+{
+	UE_LOG(LogTemp, Warning, TEXT("FIRE"))
+}
+
+
 
 
 

@@ -4,7 +4,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
-class UTankBarrel;
+class UTankBarrel; class UTank_Turret;
 class UTankAimComponent;
 UCLASS()
 class BT_PRE_ALPHA_API ATank : public APawn
@@ -15,9 +15,15 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 	void Aim(FVector AimLoc);
-	
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void Fire();
+
 	UFUNCTION(BlueprintCallable,Category=Setup)
 	void SetBarrelRef(UTankBarrel* BarrelToSet);
+	
+	UFUNCTION(BlueprintCallable,Category = Setup)
+	void SetTurretRef(UTank_Turret* TurretToSet);
 
 protected:
 	// Called when the game starts or when spawned

@@ -6,7 +6,7 @@
 #include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 #include "TankAimComponent.generated.h"
-class UTankBarrel;
+class UTankBarrel; class UTank_Turret;
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BT_PRE_ALPHA_API UTankAimComponent : public UActorComponent
 {
@@ -17,7 +17,7 @@ public:
 	UTankAimComponent();
 	void AimAt(FVector AimLoc,float LaunchSpeed);
 	void SetBarrelRef(UTankBarrel* BarrelToSet);
-	
+	void SetTurretRef(UTank_Turret* TurretToSet);
 
 protected:
 	// Called when the game starts
@@ -29,7 +29,6 @@ public:
 
 private:
 	UTankBarrel* Barrel=nullptr;
-	void MoveBarrel(FVector AimDirection);
-
-	
+	UTank_Turret* Turret = nullptr;
+	void MoveBarrelTurret(FVector AimDirection);
 };

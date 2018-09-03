@@ -11,11 +11,8 @@ void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	UE_LOG(LogTemp, Warning, TEXT("Tank is here"));
 	plyr1 = GetControlledTank();
-
-	if (!plyr1) { UE_LOG(LogTemp, Warning, TEXT("Not Working")); return; }
-	else { UE_LOG(LogTemp, Warning, TEXT("player is %s"), *(plyr1->GetName())); }
+	if (!plyr1) { UE_LOG(LogTemp, Warning, TEXT("TankPlayerController.cpp Not Working")); return; }
 }
 
 void ATankPlayerController::Tick(float DeltaTime)
