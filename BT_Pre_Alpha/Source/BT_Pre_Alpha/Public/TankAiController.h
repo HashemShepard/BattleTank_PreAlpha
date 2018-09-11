@@ -18,8 +18,7 @@ public:
 	
 
 private:
-	ATank* GetAiTank() const;
-	ATank* GetPlayerTank() const;
+	
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 	void AimTowardPlayer();

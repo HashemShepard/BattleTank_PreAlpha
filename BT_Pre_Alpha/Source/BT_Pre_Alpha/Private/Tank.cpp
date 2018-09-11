@@ -2,7 +2,10 @@
 
 #include "Tank.h"
 #include "TankAimComponent.h"
-
+#include "MovementComp.h"
+#include "Projectile.h"
+#include "TankBarrel.h"
+#include "TankTracks.h"
 // Sets default values
 ATank::ATank()
 {
@@ -11,7 +14,7 @@ ATank::ATank()
 	TankAimComponent = CreateDefaultSubobject<UTankAimComponent>(FName("Aiming Component"));
 }
 
-void ATank::SetBarrelRef(UTankBarrel* BarrelToSet) { TankAimComponent->SetBarrelRef(BarrelToSet); }
+void ATank::SetBarrelRef(UTankBarrel* BarrelToSet) { TankAimComponent->SetBarrelRef(BarrelToSet); BarrelLocalRef = BarrelToSet; }
 void ATank::SetTurretRef(UTank_Turret * TurretToSet) { TankAimComponent->SetTurretRef(TurretToSet); }
 
 // Called when the game starts or when spawned
@@ -33,8 +36,17 @@ void ATank::Aim(FVector AimLoc)
 
 void ATank::Fire()
 {
-	UE_LOG(LogTemp, Warning, TEXT("FIRE"))
+	if (!BarrelLocalRef) { UE_LOG(LogTemp, Warning, TEXT("Error in Fire Tank.Cpp")); return; }
+	if ((FPlatformTime::Seconds() - LastFireTime) > ReloadTime)
+	{
+		FVector FiringPoint = BarrelLocalRef->GetSocketLocation(FName("FiringPoint"));
+		FRotator FiringRotation = BarrelLocalRef->GetSocketRotation(FName("FiringPoint"));
+		AProjectile* Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBP, FiringPoint, FiringRotation);
+	    Projectile->Launch(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
 }
+	
 
 
 

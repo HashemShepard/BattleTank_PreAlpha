@@ -3,24 +3,13 @@
 #include "TankAiController.h"
 #include "Tank.h"
 
-ATank* ATankAiController::GetAiTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
-
-ATank * ATankAiController::GetPlayerTank() const
-{
-	return Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-}
-
 void ATankAiController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	AiPlyr = GetAiTank();
+	AiPlyr = Cast<ATank>(GetPawn());
 	if (!AiPlyr) { UE_LOG(LogTemp, Warning, TEXT("Ai Not Working")); return; }
-
-	AiEnemy = GetPlayerTank();
+	AiEnemy = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
 	if (!AiEnemy) { UE_LOG(LogTemp, Warning, TEXT("Ai Cant Find Enemy")); return; }
 }
 
@@ -28,14 +17,15 @@ void ATankAiController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	AimTowardPlayer();
-	
 }
 
 void ATankAiController::AimTowardPlayer()
 {
-	if (GetPlayerTank())
+	AiEnemy = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+	if (AiEnemy)
 	{
 		FVector PlyrLoc = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
-		GetAiTank()->Aim(PlyrLoc);
+		AiPlyr->Aim(PlyrLoc);
+		AiPlyr->Fire();
 	}
 }

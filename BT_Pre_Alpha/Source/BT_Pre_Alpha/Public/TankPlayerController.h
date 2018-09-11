@@ -28,9 +28,9 @@ private:
 	float LineTraceRange = 1000000.0;
 
 	ATank* plyr1 = nullptr;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float CrosshairXLoc=0.5;
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditDefaultsOnly)
 	float CrosshairYLoc=1.0/3.0;
 
 	
