@@ -32,8 +32,9 @@ public:
 		float LaunchSpeed = 5000.0;
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 		float ReloadTime = 3;
-	
-	UTankAimComponent* TankAimComponent = nullptr;
+
+	UPROPERTY(BlueprintReadOnly)
+		UTankAimComponent* TankAimComponent = nullptr;
 	
 
 protected:

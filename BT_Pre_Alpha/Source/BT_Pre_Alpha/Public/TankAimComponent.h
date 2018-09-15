@@ -6,6 +6,13 @@
 #include "Runtime/Engine/Classes/Components/StaticMeshComponent.h"
 #include "Runtime/Engine/Classes/Kismet/GameplayStatics.h"
 #include "TankAimComponent.generated.h"
+UENUM()
+enum class EFiringStatus : uint8
+{
+	Reloading,
+	Aiming,
+	TargetLocked
+};
 class UTankBarrel; class UTank_Turret;
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class BT_PRE_ALPHA_API UTankAimComponent : public UActorComponent
@@ -18,6 +25,9 @@ public:
 	void AimAt(FVector AimLoc,float LaunchSpeed);
 	void SetBarrelRef(UTankBarrel* BarrelToSet);
 	void SetTurretRef(UTank_Turret* TurretToSet);
+
+	UPROPERTY(BlueprintReadOnly)
+	EFiringStatus FiringStatus = EFiringStatus::Reloading;
 
 protected:
 	// Called when the game starts

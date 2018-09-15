@@ -16,9 +16,10 @@ class BT_PRE_ALPHA_API ATankPlayerController : public APlayerController
 	GENERATED_BODY()
 
 public:
+	UFUNCTION(BlueprintCallable,Category = "Setup")
+	ATank* GetControlledTank() const;
 
 private:
-	ATank* GetControlledTank() const;
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 	void AimTowardCH();

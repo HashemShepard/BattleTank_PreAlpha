@@ -37,7 +37,7 @@ void UTankAimComponent::AimAt(FVector AimLoc,float LaunchSpeed)
 
 	if (UGameplayStatics::SuggestProjectileVelocity
 	(this, OutLaunchVelocity, StartLocation, AimLoc,LaunchSpeed, false, 
-	0.0F, 0.0F, ESuggestProjVelocityTraceOption::DoNotTrace, ResponseParam, ActorsToIgnore,true))
+	0.0F, 0.0F, ESuggestProjVelocityTraceOption::DoNotTrace, ResponseParam, ActorsToIgnore,false))
 	{
 		FVector AimDir = OutLaunchVelocity.GetSafeNormal();
 		//UE_LOG(LogTemp, Warning, TEXT("%s Firing Direction : %s"), *(GetOwner()->GetName()),*(AimDir.ToString()));

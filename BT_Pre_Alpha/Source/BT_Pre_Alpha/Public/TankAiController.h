@@ -22,7 +22,7 @@ private:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 	void AimTowardPlayer();
-	
+	float Acceptance = 1500.0;
 	
 	ATank* AiPlyr = nullptr;
 	ATank* AiEnemy = nullptr;

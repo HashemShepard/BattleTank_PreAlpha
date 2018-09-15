@@ -16,6 +16,9 @@ void ATankAiController::BeginPlay()
 void ATankAiController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	AiEnemy = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
+
+	MoveToActor(AiEnemy,Acceptance);
 	AimTowardPlayer();
 }
 
