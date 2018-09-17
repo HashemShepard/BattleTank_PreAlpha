@@ -1,7 +1,6 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "Tank.h"
-#include "TankAimComponent.h"
 #include "Projectile.h"
 #include "TankBarrel.h"
 #include "TankTracks.h"
@@ -16,17 +15,6 @@ ATank::ATank()
 void ATank::BeginPlay()
 {
 	Super::BeginPlay();
-	TankAimComponent = FindComponentByClass<UTankAimComponent>();
-}
-
-
-// Called to bind functionality to input
-
-
-void ATank::Aim(FVector AimLoc)
-{
-	if (!TankAimComponent) {  return; }
-	TankAimComponent->AimAt(AimLoc, LaunchSpeed);
 }
 
 void ATank::Fire()

@@ -5,7 +5,7 @@
 #include "AIController.h"
 #include "TankAiController.generated.h"
 
-class ATank;
+class UTankAimComponent;
 /**
  * 
  */
@@ -13,18 +13,16 @@ UCLASS()
 class BT_PRE_ALPHA_API ATankAiController : public AAIController
 {
 	GENERATED_BODY()
-	
+
 public:
-	
+
 
 private:
-	
+
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
 	void AimTowardPlayer();
 	float Acceptance = 1500.0;
-	
-	ATank* AiPlyr = nullptr;
-	ATank* AiEnemy = nullptr;
-};
 
+	UTankAimComponent* AiPlyrAim = nullptr;
+};

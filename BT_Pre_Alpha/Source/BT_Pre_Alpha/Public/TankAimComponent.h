@@ -20,25 +20,24 @@ class BT_PRE_ALPHA_API UTankAimComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:	
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-		void intializeAim(UTankBarrel* BarrelToSet, UTank_Turret* TurretToSet);
-
 	// Sets default values for this component's properties
 	UTankAimComponent();
-	void AimAt(FVector AimLoc,float LaunchSpeed);
-	
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+		void intializeAim(UTankBarrel* BarrelToSet, UTank_Turret* TurretToSet);
+	void Aim(FVector AimLoc);
 
 	UPROPERTY(BlueprintReadOnly)
-	EFiringStatus FiringStatus = EFiringStatus::Aiming;
+		EFiringStatus FiringStatus = EFiringStatus::Aiming;
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+		float LaunchSpeed = 5000.0;
+
+	// Called every frame
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 	
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
 private:
 	UTankBarrel* Barrel=nullptr;
 	UTank_Turret* Turret = nullptr;

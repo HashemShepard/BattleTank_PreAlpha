@@ -5,7 +5,7 @@
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
-class ATank; class UTankAimComponent;
+class UTankAimComponent;
 
 /**
  * 
@@ -18,8 +18,6 @@ class BT_PRE_ALPHA_API ATankPlayerController : public APlayerController
 public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimComp(UTankAimComponent* AimCompRef);
-	UFUNCTION(BlueprintCallable,Category = "Setup")
-	ATank* GetControlledTank() const;
 
 private:
 	virtual void BeginPlay() override;
@@ -30,7 +28,8 @@ private:
 	bool GetVectorHitLoc(FVector LookDir, FVector &HitLocation) const;
 	float LineTraceRange = 1000000.0;
 
-	ATank* plyr1 = nullptr;
+	UTankAimComponent* AimComp = nullptr;
+
 	UPROPERTY(EditDefaultsOnly)
 	float CrosshairXLoc=0.5;
 	UPROPERTY(EditDefaultsOnly)

@@ -31,7 +31,8 @@ void UTankAimComponent::TickComponent(float DeltaTime, ELevelTick TickType, FAct
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 }
 
-void UTankAimComponent::AimAt(FVector AimLoc,float LaunchSpeed)
+
+void UTankAimComponent::Aim(FVector AimLoc)
 {
 	if (!Barrel) { return; }
 	FVector OutLaunchVelocity;
@@ -44,7 +45,6 @@ void UTankAimComponent::AimAt(FVector AimLoc,float LaunchSpeed)
 	0.0F, 0.0F, ESuggestProjVelocityTraceOption::DoNotTrace, ResponseParam, ActorsToIgnore,false))
 	{
 		FVector AimDir = OutLaunchVelocity.GetSafeNormal();
-		//UE_LOG(LogTemp, Warning, TEXT("%s Firing Direction : %s"), *(GetOwner()->GetName()),*(AimDir.ToString()));
 		MoveBarrelTurret(AimDir);
 	}
 	else

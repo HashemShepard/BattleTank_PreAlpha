@@ -1,23 +1,16 @@
 #include "TankPlayerController.h"
 #include "TankAimComponent.h"
-#include "Tank.h"
 
 
-ATank* ATankPlayerController::GetControlledTank() const
-{
-	return Cast<ATank>(GetPawn());
-}
+
 
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	auto AimComp = GetControlledTank()->FindComponentByClass<UTankAimComponent>();
+	AimComp = GetPawn()->FindComponentByClass<UTankAimComponent>();
 	if (!AimComp) { UE_LOG(LogTemp, Warning, TEXT("AimComp in TankPlayerController.cpp Not Working"));  return; }
 	FoundAimComp(AimComp);
-
-	plyr1 = GetControlledTank();
-	if (!plyr1) { UE_LOG(LogTemp, Warning, TEXT("TankPlayerController.cpp Not Working")); return; }
 }
 
 void ATankPlayerController::Tick(float DeltaTime)
@@ -28,11 +21,12 @@ void ATankPlayerController::Tick(float DeltaTime)
 
 void ATankPlayerController::AimTowardCH()
 {
-	if (!GetControlledTank()) { UE_LOG(LogTemp, Warning, TEXT("AimTowardCH Error")); return; }
+	AimComp = GetPawn()->FindComponentByClass<UTankAimComponent>();
+	if (!AimComp) { UE_LOG(LogTemp, Warning, TEXT("AimComp in TankPlayerController.cpp Not Working"));  return; }
 	FVector HitLocation;
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		GetControlledTank()->Aim(HitLocation);
+		AimComp->Aim(HitLocation);
 	}
 }
 
