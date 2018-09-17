@@ -5,7 +5,7 @@
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
 #include "TankPlayerController.generated.h"
-class ATank;
+class ATank; class UTankAimComponent;
 
 /**
  * 
@@ -16,6 +16,8 @@ class BT_PRE_ALPHA_API ATankPlayerController : public APlayerController
 	GENERATED_BODY()
 
 public:
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+	void FoundAimComp(UTankAimComponent* AimCompRef);
 	UFUNCTION(BlueprintCallable,Category = "Setup")
 	ATank* GetControlledTank() const;
 

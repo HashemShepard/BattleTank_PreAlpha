@@ -5,7 +5,6 @@
 #include "GameFramework/NavMovementComponent.h"
 #include "MovementComp.generated.h"
 class UTankTracks;
-
 /**
 * Responsible for driving the tank tracks
 */

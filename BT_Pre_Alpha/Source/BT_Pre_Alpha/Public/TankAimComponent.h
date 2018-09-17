@@ -20,14 +20,16 @@ class BT_PRE_ALPHA_API UTankAimComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:	
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+		void intializeAim(UTankBarrel* BarrelToSet, UTank_Turret* TurretToSet);
+
 	// Sets default values for this component's properties
 	UTankAimComponent();
 	void AimAt(FVector AimLoc,float LaunchSpeed);
-	void SetBarrelRef(UTankBarrel* BarrelToSet);
-	void SetTurretRef(UTank_Turret* TurretToSet);
+	
 
 	UPROPERTY(BlueprintReadOnly)
-	EFiringStatus FiringStatus = EFiringStatus::Reloading;
+	EFiringStatus FiringStatus = EFiringStatus::Aiming;
 
 protected:
 	// Called when the game starts

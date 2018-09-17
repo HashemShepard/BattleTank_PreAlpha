@@ -1,11 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 class UTankBarrel; class UTank_Turret; class AProjectile; class UTankTracks;
-class UTankAimComponent;  class UMovementComp;
+class UTankAimComponent; 
 UCLASS()
 class BT_PRE_ALPHA_API ATank : public APawn
 {
@@ -14,18 +13,15 @@ class BT_PRE_ALPHA_API ATank : public APawn
 public:
 	// Sets default values for this pawn's properties
 	ATank();
+	void BeginPlay();
 	void Aim(FVector AimLoc);
 	double LastFireTime = 0;
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	
 
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void Fire();
-	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetBarrelRef(UTankBarrel* BarrelToSet);
-	UFUNCTION(BlueprintCallable, Category = Setup)
-		void SetTurretRef(UTank_Turret* TurretToSet);
+	
 
 
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
@@ -38,7 +34,6 @@ public:
 	
 
 protected:
-	virtual void BeginPlay() override;
 	
 private:
 	
