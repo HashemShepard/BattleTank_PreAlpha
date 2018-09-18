@@ -12,19 +12,14 @@ void ATankAiController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	auto AiEnemy = GetWorld()->GetFirstPlayerController()->GetPawn();
+	auto AiPlyr = GetPawn()->FindComponentByClass<UTankAimComponent>();
 
-	MoveToActor(AiEnemy,Acceptance);
-	AimTowardPlayer();
-}
-
-void ATankAiController::AimTowardPlayer()
-{
-	auto AiEnemy = GetWorld()->GetFirstPlayerController()->GetPawn();
-	AiPlyrAim = GetPawn()->FindComponentByClass<UTankAimComponent>();
 	if (AiEnemy)
 	{
+		MoveToActor(AiEnemy, Acceptance);
 		FVector PlyrLoc = GetWorld()->GetFirstPlayerController()->GetPawn()->GetActorLocation();
-		AiPlyrAim->Aim(PlyrLoc);
-		//AiPlyr->Fire();
+		AiPlyr->Aim(PlyrLoc);
+		AiPlyr->Fire();	
 	}
 }
+

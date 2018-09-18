@@ -21,8 +21,6 @@ private:
 
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
-	void AimTowardPlayer();
-	float Acceptance = 1500.0;
-
-	UTankAimComponent* AiPlyrAim = nullptr;
+	UPROPERTY(EditDefaultsOnly, Category = "Firing" )
+		float Acceptance = 1500.0;
 };

@@ -38,8 +38,7 @@ bool ATankPlayerController::GetSightRayHitLocation(FVector &HitLocation) const
 	FVector WorldLoc, LookDir;
 	if (GetLookDir(CrosshairLOC, WorldLoc, LookDir))
 	{
-		GetVectorHitLoc(LookDir,HitLocation);
-		return true;
+		return GetVectorHitLoc(LookDir,HitLocation);
 	}
 	return false;
 }

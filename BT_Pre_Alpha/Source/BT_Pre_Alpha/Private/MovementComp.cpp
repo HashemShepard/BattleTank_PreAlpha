@@ -31,8 +31,9 @@ void UMovementComp::RequestDirectMove(const FVector & MoveVelocity, bool bForceM
 	auto AIForwardIntention = MoveVelocity.GetSafeNormal();
 
 	auto ForwardThrow = FVector::DotProduct(TankForward, AIForwardIntention);
-	OnWard(ForwardThrow);
+	OnWard(ForwardThrow+0.25);
 
 	auto RightThrow = FVector::CrossProduct(TankForward, AIForwardIntention).Z;
-	IntendTurnRight(RightThrow);
+	IntendTurnRight(RightThrow+0.25);
+	
 }
