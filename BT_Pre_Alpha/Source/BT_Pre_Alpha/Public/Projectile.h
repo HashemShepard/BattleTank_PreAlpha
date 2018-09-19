@@ -4,6 +4,9 @@
 #include "Components/StaticMeshComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Particles/ParticleSystemComponent.h"
+#include "PhysicsEngine/RadialForceComponent.h"
+#include "Public/TimerManager.h"
+#include "Engine/World.h"
 #include "GameFramework/Actor.h"
 #include "Projectile.generated.h"
 
@@ -18,18 +21,25 @@ public:
 	UProjectileMovementComponent* ProjectileMovementComponent = nullptr;
 	virtual void Tick(float DeltaTime) override;
 	void Launch(float speed);
-
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+		float DestoryDelay = 0.1;
 	UPROPERTY(VisibleAnywhere, Category = Firing)
 		UStaticMeshComponent* CollisionMesh=nullptr;
 	UPROPERTY(VisibleAnywhere, Category = Firing)
 		UParticleSystemComponent* LaunchBlast = nullptr;
-
+	UPROPERTY(VisibleAnywhere, Category = Firing)
+		UParticleSystemComponent* ImpactBlast = nullptr;
+	UPROPERTY(VisibleAnywhere, Category = Firing)
+		URadialForceComponent* ExplosionForce = nullptr;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 private:	
-	// Called every frame
+	UFUNCTION()
+		void OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit);
+
+	void OnExpire();
 
 };
