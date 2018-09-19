@@ -39,8 +39,8 @@ public:
 		float ReloadTime = 3;
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 		float Tolerance = 0.1;
-
-	int PlyrAmmo = 2;
+	UPROPERTY(EditAnywhere, Category = Firing)
+		int PlyrAmmo = 2;
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		int GetAmmoLeft();
