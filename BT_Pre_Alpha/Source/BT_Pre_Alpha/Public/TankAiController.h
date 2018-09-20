@@ -17,8 +17,12 @@ class BT_PRE_ALPHA_API ATankAiController : public AAIController
 public:
 	virtual void SetPawn(APawn* InPawn) override;
 
+
 	UFUNCTION()
 		void OnAiTankDeath();
+
+	UFUNCTION()
+		void OnAiMortarDeath();
 
 private:
 

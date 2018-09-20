@@ -3,6 +3,25 @@
 #include "TankAiController.h"
 #include "TankAimComponent.h"
 #include "Tank.h"
+#include"Mortar.h"
+
+
+
+
+void ATankAiController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+	if (InPawn)
+	{
+		auto PossessedMortar = Cast<AMortar>(InPawn);
+		if (!ensure(PossessedMortar)) { return; }
+		PossessedMortar->OnMortarDeath.AddUniqueDynamic(this, &ATankAiController::OnAiMortarDeath);
+		UE_LOG(LogTemp, Warning, TEXT("MORTAR"));
+		auto PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank)) { return; }
+		PossessedTank->OnTankDeath.AddUniqueDynamic(this, &ATankAiController::OnAiTankDeath);
+	}
+}
 
 
 void ATankAiController::BeginPlay()
@@ -10,18 +29,12 @@ void ATankAiController::BeginPlay()
 	Super::BeginPlay();
 }
 
-void ATankAiController::SetPawn(APawn* InPawn)
-{
-	Super::SetPawn(InPawn);
-	if (InPawn)
-	{
-		auto PossessedTank = Cast<ATank>(InPawn);
-		if (!ensure(PossessedTank)) { return; }
-		PossessedTank->OnTankDeath.AddUniqueDynamic(this, &ATankAiController::OnAiTankDeath);
-	}
-}
-
 void ATankAiController::OnAiTankDeath()
+{
+	if (!GetPawn()) { return; }
+	GetPawn()->DetachFromControllerPendingDestroy();
+}
+void ATankAiController::OnAiMortarDeath()
 {
 	if (!GetPawn()) { return; }
 	GetPawn()->DetachFromControllerPendingDestroy();
