@@ -5,11 +5,12 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Particles/ParticleSystemComponent.h"
 #include "PhysicsEngine/RadialForceComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "GameFramework/DamageType.h"
 #include "Public/TimerManager.h"
 #include "Engine/World.h"
 #include "GameFramework/Actor.h"
 #include "Projectile.generated.h"
-
 UCLASS()
 class BT_PRE_ALPHA_API AProjectile : public AActor
 {
@@ -19,10 +20,14 @@ public:
 	// Sets default values for this actor's properties
 	AProjectile();
 	UProjectileMovementComponent* ProjectileMovementComponent = nullptr;
+
 	virtual void Tick(float DeltaTime) override;
 	void Launch(float speed);
+
 	UPROPERTY(EditDefaultsOnly, Category = Firing)
 		float DestoryDelay = 0.1;
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+		float BaseDamage = 20;
 	UPROPERTY(VisibleAnywhere, Category = Firing)
 		UStaticMeshComponent* CollisionMesh=nullptr;
 	UPROPERTY(VisibleAnywhere, Category = Firing)

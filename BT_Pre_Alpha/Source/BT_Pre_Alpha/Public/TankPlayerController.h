@@ -4,9 +4,9 @@
 #include "Runtime/Engine/Public/CollisionQueryParams.h"
 #include "Engine/World.h"
 #include "GameFramework/PlayerController.h"
+#include "GameFramework/Pawn.h"
 #include "TankPlayerController.generated.h"
 class UTankAimComponent;
-
 /**
  * 
  */
@@ -18,6 +18,15 @@ class BT_PRE_ALPHA_API ATankPlayerController : public APlayerController
 public:
 	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
 	void FoundAimComp(UTankAimComponent* AimCompRef);
+
+	virtual void SetPawn(APawn* InPawn) override;
+
+
+
+	UFUNCTION()
+		void OnPlyrTankDeath();
+
+
 
 private:
 	virtual void BeginPlay() override;

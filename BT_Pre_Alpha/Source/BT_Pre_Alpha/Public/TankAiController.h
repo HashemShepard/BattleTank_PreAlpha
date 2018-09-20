@@ -15,7 +15,10 @@ class BT_PRE_ALPHA_API ATankAiController : public AAIController
 	GENERATED_BODY()
 
 public:
+	virtual void SetPawn(APawn* InPawn) override;
 
+	UFUNCTION()
+		void OnAiTankDeath();
 
 private:
 

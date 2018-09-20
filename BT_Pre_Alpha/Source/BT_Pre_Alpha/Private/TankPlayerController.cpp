@@ -1,8 +1,18 @@
 #include "TankPlayerController.h"
 #include "TankAimComponent.h"
+#include "Tank.h"
 
 
-
+void ATankPlayerController::SetPawn(APawn* InPawn)
+{
+	Super::SetPawn(InPawn);
+	if (InPawn)
+	{
+		auto PossessedTank = Cast<ATank>(InPawn);
+		if (!ensure(PossessedTank)) { return; }
+		PossessedTank->OnTankDeath.AddUniqueDynamic(this, &ATankPlayerController::OnPlyrTankDeath);
+	}
+}
 
 void ATankPlayerController::BeginPlay()
 {
@@ -13,6 +23,8 @@ void ATankPlayerController::BeginPlay()
 	FoundAimComp(AimComp);
 }
 
+
+
 void ATankPlayerController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -21,7 +33,9 @@ void ATankPlayerController::Tick(float DeltaTime)
 
 void ATankPlayerController::AimTowardCH()
 {
-	AimComp = GetPawn()->FindComponentByClass<UTankAimComponent>();
+	APawn* Here = GetPawn();
+	if (!Here) { return; }
+	AimComp = Here->FindComponentByClass<UTankAimComponent>();
 	if (!AimComp) { UE_LOG(LogTemp, Warning, TEXT("AimComp in TankPlayerController.cpp Not Working"));  return; }
 	FVector HitLocation;
 	if (GetSightRayHitLocation(HitLocation))
@@ -62,6 +76,10 @@ bool ATankPlayerController::GetVectorHitLoc(FVector LookDir , FVector &HitLocati
 	return false;
 }
 
-
+void ATankPlayerController::OnPlyrTankDeath()
+{
+	if (!GetPawn()) { return; }
+	StartSpectatingOnly();
+}
 
 

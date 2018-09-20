@@ -69,10 +69,6 @@ void UTankAimComponent::Aim(FVector AimLoc)
 	    AimDirection = OutLaunchVelocity.GetSafeNormal();
 		MoveBarrelTurret(AimDirection);
 	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("No Target"));
-	}
 }
 
 
